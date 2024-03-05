@@ -1,9 +1,14 @@
 package Recursion;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
 
-        System.out.println(capitalizeWord("i like the way"));
+        int[] candidates = {2, 5, 2, 1, 2};
+       
 
     }
 
@@ -110,5 +115,33 @@ public class Main {
             count++;
         }
         return captilizedStr.toString();
+    }
+
+    public static List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        List<List<Integer>> results = new ArrayList<>();
+        Arrays.sort(candidates);
+        Backtrack(results, new ArrayList<>(), candidates, target, 0);
+        return results;
+    }
+
+    private static void Backtrack(List<List<Integer>> results, List<Integer> tempList, int[] candidates, int target,
+                                  int index) {
+        if (target < 0)
+            return;
+        if (target == 0) {
+            results.add(new ArrayList<>(tempList));
+            return;
+        }
+
+        for (int i = index; i < candidates.length; i++) {
+            if (i > index && candidates[i] == candidates[i - 1]) {
+                continue;
+            }
+
+            tempList.add(candidates[i]);
+            Backtrack(results, tempList, candidates, target - candidates[i], i + 1);
+            tempList.remove(tempList.size() - 1);
+
+        }
     }
 }
