@@ -18,6 +18,5 @@ public class Main {
 //        adjLists.add(1, b);
 //        adjLists.add(2, c);
 
-
     }
 }
