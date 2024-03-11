@@ -75,4 +75,32 @@ public class GraphList {
         }
 
     }
+
+    public static void pathPrint(GraphNode node) {
+        if (node.parent != null) {
+            pathPrint(node.parent);
+        }
+
+        System.out.print(node.name + " ");
+    }
+
+    public void BFSForShortestPath(GraphNode node) {
+        LinkedList<GraphNode> queue = new LinkedList<>();
+        queue.add(node);
+
+        while (!queue.isEmpty()) {
+            GraphNode currentNode = queue.poll();
+            currentNode.isVisited = true;
+            System.out.print("Printing path for node " + currentNode.name + ": ");
+            pathPrint(currentNode);
+            System.out.println();
+            for (GraphNode neighbor : currentNode.neighbors) {
+                if (!neighbor.isVisited) {
+                    queue.add(neighbor);
+                    neighbor.isVisited = true;
+                    neighbor.parent = currentNode;
+                }
+            }
+        }
+    }
 }
